@@ -13,7 +13,7 @@
 
     // 쿼리 만드는 부분
     $query  = "INSERT INTO `store` (`storeid`, `address`, `tel`, `text`, `imgsrc`, `alarmtime`, `password`)
-              VALUES ($storeid, '$address', '$tel', '$text', '$imgsrc', '$alarmtime', '$password')";
+              VALUES ('$storeid', '$address', '$tel', '$text', '$imgsrc', '$alarmtime', '$password')";
 
     // 실제로 디비에 넣는 부분
     create($query);
