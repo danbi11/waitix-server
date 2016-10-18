@@ -13,9 +13,11 @@ $alarmtime = $_REQUEST["alarmtime"];
 $password = $_REQUEST["password"];
 
 // 쿼리 만드는 부분
-$query  = "UPDATE store SET storeid='$storeid', address='$address', tel='$tel', text='$text', 
+
+$query = "UPDATE store SET storeid='$storeid', address='$address', tel='$tel', text='$text', 
             imgsrc='$imgsrc', alarmtime='$alarmtime', password='$password'
-            WHERE snum=$snum";
+            ";
+//WHERE snum=$snum 넣으면 에러나용
 
 // 실제로 디비에 넣는 부분
 update($query);

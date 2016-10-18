@@ -13,4 +13,4 @@ $query  = "SELECT * FROM user WHERE unum=$unum";
 read($query);
 
 // 클라이언트한테 응답해주는 부분
-echo "unum=".$row["unum"];
+echo "unum=$unum";
