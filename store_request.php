@@ -7,13 +7,13 @@ $unum = $_REQUEST["unum"];
 $snum = $_REQUEST["snum"];
 $pon = $_REQUEST["pon"];
 
+// 오프라인 유저를 만들고 신청하는 부분
+$createOfflineUserQuery = "INSERT INTO `user` (`unum`, `date`, `pon`, `offtx`, `snum`) VALUES ('$unum', NOW(), $pon, 'yes', $snum)";
+create($createOfflineUserQuery);
 
-// 쿼리 만드는 부분
-$query  = "INSERT INTO `user` (`unum`, `snum`, `pon`)
-              VALUES ($unum, '$snum', '$pon')";
-
-// 실제로 디비에 넣는 부분
-create($query);
+// 매장의 대기인원을 늘리는 부분
+$increaseStoreWaitPon = "UPDATE `store` SET `waitpon` = `waitpon` + 1 WHERE `snum` = $snum";
+update($increaseStoreWaitPon);
 
 // 클라이언트한테 응답해주는 부분
 echo "{\"sucess\": true, \"desc\": \"오프라인 발급신청 되었습니다.\"}";

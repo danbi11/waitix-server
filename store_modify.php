@@ -1,9 +1,16 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["snum"]) || empty($_SESSION["snum"])) {
+    echo "{\"success\": false, \"desc\": \"로그인을 먼저 해주세요.\"}";
+    return ;
+}
+
 // 디비 연결 부분 인클루드
 include("./dao.php");
 
 // 파라미터 받는 부분
-$snum = $_REQUEST["snum"];
+$snum = $_SESSION["snum"];
 $storeid = $_REQUEST["storeid"];
 $address = $_REQUEST["address"];
 $tel = $_REQUEST["tel"];
@@ -13,11 +20,9 @@ $alarmtime = $_REQUEST["alarmtime"];
 $password = $_REQUEST["password"];
 
 // 쿼리 만드는 부분
-
 $query = "UPDATE store SET storeid='$storeid', address='$address', tel='$tel', text='$text', 
             imgsrc='$imgsrc', alarmtime='$alarmtime', password='$password'
-            ";
-//WHERE snum=$snum 넣으면 에러나용
+            WHERE snum=$snum";
 
 // 실제로 디비에 넣는 부분
 update($query);

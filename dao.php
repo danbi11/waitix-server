@@ -13,6 +13,11 @@
         die('DB Connect Error: '.$connection->connect_error);
     }
 
+    function getConnection() {
+        global $connection;
+        return $connection;
+    }
+
     function create($query) {
         global $connection;
         if ($connection->query($query) === TRUE) {
@@ -26,13 +31,6 @@
     function read($query) {
         global $connection;
         $result = $connection->query($query);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "Row: " . $row;
-            }
-        } else {
-            echo "0 results";
-        }
         $connection->close();
         return $result;
     }

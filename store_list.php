@@ -5,12 +5,17 @@ include("./dao.php");
 // 파라미터 받는 부분
 $storeid = $_REQUEST["storeid"];
 
+$getStoresQuery = "SELECT * FROM store";
+$result = read($getStoresQuery);
 
-// 쿼리 만드는 부분
-$query  = "SELECT * FROM store WHERE storeid=$storeid";
+if ($result->num_rows > 0) {
+    $stores = array();
+    foreach($result->fetch_all() as $store) {
+        $stores[] = $store;
+    }
+    $dumpedStores = json_encode($stores);
+    echo "{\"success\": true, \"stores\": $dumpedStores}";
 
-// 실제로 디비에 넣는 부분
-read($query);
-
-// 클라이언트한테 응답해주는 부분
-echo "매장리스트 출력";
+} else {
+    echo "{\"success\": false, \"desc\": \"매장 정보가 없습니다.\"}";
+}

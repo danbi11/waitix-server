@@ -3,18 +3,18 @@
     include("./dao.php");
 
     // 파라미터 받는 부분
-    $storeid = $_REQUEST["storeid"];
-    $address = $_REQUEST["address"];
-    $tel = $_REQUEST["tel"];
-    $text = $_REQUEST["text"];
-    $imgsrc = $_REQUEST["imgsrc"];
-    $alarmtime = $_REQUEST["alarmtime"];
-    $password = $_REQUEST["password"];
+    $storeid = getConnection()->real_escape_string($_REQUEST["storeid"]);
+    $name = getConnection()->real_escape_string($_REQUEST["name"]);
+    $address = getConnection()->real_escape_string($_REQUEST["address"]);
+    $tel = getConnection()->real_escape_string($_REQUEST["tel"]);
+    $text = getConnection()->real_escape_string($_REQUEST["text"]);
+    $imgsrc = getConnection()->real_escape_string($_REQUEST["imgsrc"]);
+    $alarmtime = getConnection()->real_escape_string($_REQUEST["alarmtime"]);
+    $password = getConnection()->real_escape_string($_REQUEST["password"]);
 
     // 쿼리 만드는 부분
-    $query  = "INSERT INTO `store` (`storeid`, `address`, `tel`, `text`, `imgsrc`, `alarmtime`, `password`)
-              VALUES ('$storeid', '$address', '$tel', '$text', '$imgsrc', '$alarmtime', '$password')";
-    /*여기서 snum을 안넣어주는데, 이 이후에 기본키로 지정한 snum을 수정할 수도 참조할 수도 없는 것 같아용 ㅠㅠ*/
+    $query  = "INSERT INTO `store` (`storeid`, `name`, `address`, `tel`, `text`, `imgsrc`, `alarmtime`, `password`)
+              VALUES ('$storeid', '$name', '$address', '$tel', '$text', '$imgsrc', '$alarmtime', password('$password'))";
 
     // 실제로 디비에 넣는 부분
     create($query);
