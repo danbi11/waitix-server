@@ -8,6 +8,7 @@ $unum = $_REQUEST["unum"];
 
 // 쿼리 만드는 부분
 $query  = "SELECT * FROM user WHERE unum=$unum";
+//snum이 참조가 안되는거 같아용
 
 // 실제로 디비에 넣는 부분
 delete($query);
