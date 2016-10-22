@@ -14,7 +14,7 @@ $snum = $_SESSION["snum"];
 // 쿼리 만드는 부분
 $query = "SELECT (`waitpon` * `waittime`) AS `total_waittime`, `waitpon` AS `total_pon`, 
             SUM(`history`.`pon`) AS `online_pon`, (`waitpon` - SUM(`history`.`pon`)) AS `offilne_pon` FROM `store` 
-            LEFT JOIN `history` ON `store`.`snum` = `history`.`snum` WHERE `snum`=$snum";
+            LEFT JOIN `history` ON `store`.`snum` = `history`.`snum` WHERE `store`.`snum`=$snum";
 
 // 실제로 디비에 넣는 부분
 $result = read($query);
@@ -38,3 +38,5 @@ if ($result->num_rows > 0) {
 } else {
     echo "{\"success\": false, \"desc\": \"현재 매장상황을 알 수 없습니다.\"}";
 }
+
+close();

@@ -18,40 +18,53 @@
         return $connection;
     }
 
+    function close() {
+        global $connection;
+        $connection->close();
+    }
+
     function create($query) {
         global $connection;
-        if ($connection->query($query) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $query . "<br>" . $connection->error;
+        $success = FALSE;
+        try {
+            $success = $connection->query($query);
+        } finally {
+            if ($success === FALSE) {
+                echo "Error: ".$connection->error;
+            }
+            return $success;
         }
-        $connection->close();
     }
 
     function read($query) {
         global $connection;
         $result = $connection->query($query);
-        $connection->close();
         return $result;
     }
 
     function update($query) {
         global $connection;
-        if ($connection->query($query) === TRUE) {
-            echo "Record updated successfully";
-        } else {
-            echo "Error updating record: " . $connection->error;
+        $success = FALSE;
+        try {
+            $success = $connection->query($query);
+        } finally {
+            if ($success === FALSE) {
+                echo "Error: ".$connection->error;
+            }
+            return $success;
         }
-        $connection->close();
     }
 
     function delete($query) {
         global $connection;
-        if ($connection->query($query) === TRUE) {
-            echo "Record deleted successfully";
-        } else {
-            echo "Error deleting record: " . $connection->error;
+        $success = FALSE;
+        try {
+            $success = $connection->query($query);
+        } finally {
+            if ($success === FALSE) {
+                echo "Error: ".$connection->error;
+            }
+            return $success;
         }
-        $connection->close();
     }
 

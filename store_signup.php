@@ -11,13 +11,16 @@
     $imgsrc = getConnection()->real_escape_string($_REQUEST["imgsrc"]);
     $alarmtime = getConnection()->real_escape_string($_REQUEST["alarmtime"]);
     $password = getConnection()->real_escape_string($_REQUEST["password"]);
+    $waittime = getConnection()->real_escape_string($_REQUEST["waittime"]);
 
     // 쿼리 만드는 부분
-    $query  = "INSERT INTO `store` (`storeid`, `name`, `address`, `tel`, `text`, `imgsrc`, `alarmtime`, `password`)
-              VALUES ('$storeid', '$name', '$address', '$tel', '$text', '$imgsrc', '$alarmtime', password('$password'))";
+    $query  = "INSERT INTO `store` (`storeid`, `name`, `address`, `tel`, `text`, `imgsrc`, `alarmtime`, `password`, `waittime`)
+              VALUES ('$storeid', '$name', '$address', '$tel', '$text', '$imgsrc', '$alarmtime', password('$password'), $waittime)";
 
     // 실제로 디비에 넣는 부분
     create($query);
+
+    close();
 
     // 클라이언트한테 응답해주는 부분
     echo "{\"sucess\": true, \"desc\": \"회원가입을 축하합니다.\"}";

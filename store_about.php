@@ -45,4 +45,6 @@ if ($result->num_rows > 0) {
     echo "{\"success\": false, \"desc\": \"찾을 수 없는 매장입니다.\"}";
 }
 
+close();
+
 
